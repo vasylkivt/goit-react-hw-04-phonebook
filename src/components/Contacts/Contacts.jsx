@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types';
 
-import ContactList from 'components/ContactList/ContactList';
-import Filter from 'components/Filter/Filter';
+import { Filter, ContactList, ContactListIcon } from 'components';
 import { Title, Wrap } from './Contacts.style';
 
-export default function Contacts({
+export function Contacts({
   contacts,
   value,
   title,
@@ -14,9 +13,8 @@ export default function Contacts({
 }) {
   return (
     <Wrap>
-      <Title>
-        <span>{title}</span>
-      </Title>
+      <ContactListIcon />
+      <Title>{title}</Title>
       <Filter onChange={onChange} value={value} />
       <ContactList onRemoveContact={onRemoveContact} contacts={contacts} />
       {children}

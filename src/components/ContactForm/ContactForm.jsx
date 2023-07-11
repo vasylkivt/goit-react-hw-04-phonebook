@@ -1,26 +1,26 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
+import { nanoid } from 'nanoid';
+import { Formik } from 'formik';
 import {
   ButtonSubmit,
   Form,
   FormWrap,
   Input,
   InputName,
+  PersonIcon,
+  TelephoneIcon,
 } from './ContactForm.style';
+import { ContactFormIcon } from 'components';
 
-//?-------------------------------
-//? contact form
-
-import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
-import { Formik } from 'formik';
-
-export default function ContactForm({ onSubmit, children }) {
+export function ContactForm({ onSubmit, children }) {
   const nameInputId = nanoid();
   const numberInputId = nanoid();
 
   return (
     <FormWrap>
+      <ContactFormIcon />
       {children}
       <Formik
         initialValues={{
@@ -33,8 +33,9 @@ export default function ContactForm({ onSubmit, children }) {
       >
         <Form>
           <InputName htmlFor={nameInputId}>
-            Name{' '}
+            <PersonIcon />
             <Input
+              autoComplete="off"
               placeholder="Enter contact name"
               id={nameInputId}
               type="text"
@@ -46,8 +47,9 @@ export default function ContactForm({ onSubmit, children }) {
           </InputName>
 
           <InputName htmlFor={numberInputId}>
-            Number
+            <TelephoneIcon />
             <Input
+              autoComplete="off"
               placeholder="Enter phone number"
               id={numberInputId}
               type="tel"

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 const save = (key, value) => {
   try {
     const serializedState = JSON.stringify(value);
@@ -17,7 +16,7 @@ const load = key => {
   }
 };
 
-export default {
-  save,
+export const LocalStorage = {
   load,
+  save,
 };

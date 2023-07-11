@@ -1,8 +1,15 @@
 import PropTypes from 'prop-types';
-import { RiDeleteBin6Line } from 'react-icons/ri';
-import { Button, Contact, List, Text, TextWrap } from './ContactList.style';
 
-export default function ContactList({ contacts, onRemoveContact }) {
+import {
+  Button,
+  Contact,
+  DeleteIcon,
+  List,
+  Text,
+  TextWrap,
+} from './ContactList.style';
+
+export function ContactList({ contacts, onRemoveContact }) {
   return (
     <List>
       {contacts.map(({ name, number, id }) => (
@@ -12,7 +19,7 @@ export default function ContactList({ contacts, onRemoveContact }) {
             <Text>{number}</Text>
           </TextWrap>
           <Button onClick={() => onRemoveContact(id)} type="button">
-            <RiDeleteBin6Line />
+            <DeleteIcon />
           </Button>
         </Contact>
       ))}

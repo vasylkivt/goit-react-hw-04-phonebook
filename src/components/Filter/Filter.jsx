@@ -1,17 +1,15 @@
 import PropTypes from 'prop-types';
-import { Input, InputName } from './Filter.style';
+import { Input } from './Filter.style';
 
-export default function Filter({ value, onChange }) {
+export function Filter({ value, onChange }) {
   return (
     <>
-      <InputName>
-        <Input
-          placeholder="Find contacts"
-          onChange={onChange}
-          value={value}
-          type="text"
-        />
-      </InputName>
+      <Input
+        placeholder="Find contacts"
+        onChange={onChange}
+        value={value}
+        type="text"
+      />
     </>
   );
 }
