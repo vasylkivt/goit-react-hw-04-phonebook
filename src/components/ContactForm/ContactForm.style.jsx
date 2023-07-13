@@ -30,7 +30,7 @@ export const InputName = styled.label`
 
   transition: all ${({ theme }) => theme.animation.cubicBezier};
 
-  &:focus,
+  &:focus-within,
   &:hover {
     background-color: ${({ theme }) => theme.colors.backgroundColorInput}30;
     border-radius: 5px;
