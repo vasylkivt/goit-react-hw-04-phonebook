@@ -15,8 +15,8 @@ import { toastOptions } from 'styles';
 const LOCAL_STORAGE_KEY = 'contacts';
 
 export const App = () => {
-  const [contacts, setContact] = useState(setInitialData);
   const [filter, setFilter] = useState('');
+  const [contacts, setContact] = useState(setInitialData);
 
   useEffect(() => {
     LocalStorage.save(LOCAL_STORAGE_KEY, contacts);
@@ -24,17 +24,10 @@ export const App = () => {
 
   function setInitialData() {
     const localStorageData = LocalStorage.load(LOCAL_STORAGE_KEY);
-
-    if (localStorageData) {
-      return localStorageData;
-    } else {
-      return [];
-    }
+    return localStorageData ? localStorageData : [];
   }
 
-  const changeFilter = ({ target: { value } }) => {
-    setFilter(value);
-  };
+  const changeFilter = e => setFilter(e.currentTarget.value);
 
   const removeContact = contactId => {
     const removedContact = contacts.find(({ id }) => id === contactId);
@@ -44,18 +37,21 @@ export const App = () => {
   };
 
   const addContact = (contact, actions) => {
-    const isExist = contacts.find(
-      ({ name }) => name.toLowerCase() === contact.name.toLowerCase()
-    );
+    setContact(prevContacts => {
+      //? якщо "find" знайде у контакт, буде попередження, що такий контакт з таким ім'ям уже є
+      if (
+        contacts.find(
+          ({ name }) => name.toLowerCase() === contact.name.toLowerCase()
+        )
+      ) {
+        toast.error(`${contact.name} is already in contacts.`);
+        return;
+      }
 
-    if (isExist) {
-      toast.error(`${contact.name} is already in contacts.`);
-      return;
-    }
+      return [contact, ...prevContacts];
+    });
 
-    setContact([...contacts, contact]);
     toast.success(`${contact.name} added to your contact list.`);
-
     actions.resetForm();
   };
 

@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 
 import { Wrapper, Title } from './Section.style';
 
-export function Section({ title, children, className }) {
+export function Section({ title, children }) {
   return (
-    <Wrapper className={className}>
+    <Wrapper>
       <Title>{title}</Title>
       {children}
     </Wrapper>
