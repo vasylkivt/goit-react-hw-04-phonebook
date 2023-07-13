@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { LocalStorage } from 'helpers';
 
 import {
   Notification,
@@ -16,16 +15,13 @@ const LOCAL_STORAGE_KEY = 'contacts';
 
 export const App = () => {
   const [filter, setFilter] = useState('');
-  const [contacts, setContact] = useState(setInitialData);
+  const [contacts, setContact] = useState(
+    JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_KEY)) ?? []
+  );
 
   useEffect(() => {
-    LocalStorage.save(LOCAL_STORAGE_KEY, contacts);
+    window.localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
   }, [contacts]);
-
-  function setInitialData() {
-    const localStorageData = LocalStorage.load(LOCAL_STORAGE_KEY);
-    return localStorageData ? localStorageData : [];
-  }
 
   const changeFilter = e => setFilter(e.currentTarget.value);
 
@@ -37,17 +33,20 @@ export const App = () => {
   };
 
   const addContact = (contact, actions) => {
-    setContact(prevContacts => {
-      //? якщо "find" знайде у контакт, буде попередження, що такий контакт з таким ім'ям уже є
-      if (
-        contacts.find(
-          ({ name }) => name.toLowerCase() === contact.name.toLowerCase()
-        )
-      ) {
-        toast.error(`${contact.name} is already in contacts.`);
-        return;
-      }
+    if (
+      contacts.find(
+        ({ name }) => name.toLowerCase() === contact.name.toLowerCase()
+      )
+    ) {
+      toast.error(`${contact.name}  is already in contacts. `);
+      return;
+    }
+    if (contacts.find(({ number }) => number === contact.number)) {
+      toast.error(`Number "${contact.number}" is already in contacts. `);
+      return;
+    }
 
+    setContact(prevContacts => {
       return [contact, ...prevContacts];
     });
 
