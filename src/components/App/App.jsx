@@ -3,9 +3,13 @@ import { useEffect, useState } from 'react';
 import {
   Notification,
   Section,
-  Contacts,
   Container,
   ContactForm,
+  ContactListIcon,
+  Filter,
+  ContactList,
+  ContactFormIcon,
+  Title,
 } from 'components';
 
 import { Toaster, toast } from 'react-hot-toast';
@@ -66,37 +70,45 @@ export const App = () => {
   const isPhonebookEmpty = contacts.length === 0;
 
   return (
-    <Section title={'phonebook'}>
-      <Container>
-        <ContactForm onSubmit={addContact}>
-          {isPhonebookEmpty && (
-            <Notification $textAlign="right" $marginBottom="30px">
-              Add first contact!
-            </Notification>
-          )}
-        </ContactForm>
-        <div>
-          <Toaster toastOptions={toastOptions} />
-        </div>
-
-        {!isPhonebookEmpty ? (
-          <Contacts
-            title={'contact list'}
-            contacts={getFilterContacts()}
-            value={filter}
-            onChange={changeFilter}
-            onRemoveContact={removeContact}
-          >
-            {!isPhonebookEmpty && filterContacts.length === 0 && (
-              <Notification>nothing found</Notification>
+    <>
+      <Section $marginBottom="40px">
+        <Container>
+          <Title $marginLeft="auto">phonebook</Title>
+          <ContactFormIcon />
+          <ContactForm onSubmit={addContact}>
+            {isPhonebookEmpty && (
+              <Notification $textAlign="right" $marginBottom="30px">
+                Add first contact!
+              </Notification>
             )}
-          </Contacts>
-        ) : (
-          <Notification $textAlign="center">
-            Your phonebook is empty.
-          </Notification>
-        )}
-      </Container>
-    </Section>
+          </ContactForm>
+        </Container>
+      </Section>
+
+      {!isPhonebookEmpty ? (
+        <Section>
+          <Container>
+            <Title>contact list</Title>
+            <ContactListIcon />
+            <Filter onChange={changeFilter} value={filter} />
+            <ContactList
+              onRemoveContact={removeContact}
+              contacts={filterContacts}
+            >
+              {!isPhonebookEmpty && filterContacts.length === 0 && (
+                <Notification>nothing found</Notification>
+              )}
+            </ContactList>
+          </Container>
+        </Section>
+      ) : (
+        <Notification $textAlign="center">
+          Your phonebook is empty.
+        </Notification>
+      )}
+      <div>
+        <Toaster toastOptions={toastOptions} />
+      </div>
+    </>
   );
 };

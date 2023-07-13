@@ -78,3 +78,15 @@ export const DeleteIcon = styled(RiDeleteBin6Line)`
   fill: ${({ theme }) => theme.colors.textColorDark};
   transition: all ${({ theme }) => theme.animation.cubicBezier};
 `;
+
+export const ContactCardIcon = styled.svg`
+  top: 16px;
+  right: 16px;
+
+  z-index: 0;
+  max-width: 280px;
+  height: auto;
+
+  position: absolute;
+  fill: ${({ theme }) => theme.colors.backgroundColorMain};
+`;

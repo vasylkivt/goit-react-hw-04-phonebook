@@ -6,21 +6,18 @@ import { Formik } from 'formik';
 import {
   ButtonSubmit,
   Form,
-  FormWrap,
   Input,
   InputName,
   PersonIcon,
   TelephoneIcon,
 } from './ContactForm.style';
-import { ContactFormIcon } from 'components';
 
 export function ContactForm({ onSubmit, children }) {
   const nameInputId = nanoid();
   const numberInputId = nanoid();
 
   return (
-    <FormWrap>
-      <ContactFormIcon />
+    <>
       {children}
       <Formik
         initialValues={{
@@ -63,7 +60,7 @@ export function ContactForm({ onSubmit, children }) {
           <ButtonSubmit type="submit">Add contact</ButtonSubmit>
         </Form>
       </Formik>
-    </FormWrap>
+    </>
   );
 }
 

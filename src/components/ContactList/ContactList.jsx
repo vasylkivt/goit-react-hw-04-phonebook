@@ -9,21 +9,24 @@ import {
   TextWrap,
 } from './ContactList.style';
 
-export function ContactList({ contacts, onRemoveContact }) {
+export function ContactList({ contacts, onRemoveContact, children }) {
   return (
-    <List>
-      {contacts.map(({ name, number, id }) => (
-        <Contact key={id}>
-          <TextWrap>
-            <Text>{name}</Text>
-            <Text>{number}</Text>
-          </TextWrap>
-          <Button onClick={() => onRemoveContact(id)} type="button">
-            <DeleteIcon />
-          </Button>
-        </Contact>
-      ))}
-    </List>
+    <>
+      <List>
+        {contacts.map(({ name, number, id }) => (
+          <Contact key={id}>
+            <TextWrap>
+              <Text>{name}</Text>
+              <Text>{number}</Text>
+            </TextWrap>
+            <Button onClick={() => onRemoveContact(id)} type="button">
+              <DeleteIcon />
+            </Button>
+          </Contact>
+        ))}
+      </List>
+      {children}
+    </>
   );
 }
 

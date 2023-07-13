@@ -1,4 +1,4 @@
-import { ContactCardIcon } from './Contacts.style';
+import { ContactCardIcon } from './ContactList.style';
 
 export const ContactListIcon = () => {
   return (

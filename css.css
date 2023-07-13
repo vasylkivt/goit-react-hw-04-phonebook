@@ -1,0 +1,14 @@
+body {
+  position: relative;
+  z-index: 1;
+  width: max-content;
+  margin-bottom: 10px /* ${({ theme }) => theme.spacing(12)} */;
+  margin-left: 10px
+    /* ${({ $marginLeft }) => (!$marginLeft ? 0 : $marginLeft)} */;
+
+  color: black /* ${({ theme }) => theme.colors.textColorDark} */;
+  font-weight: 700;
+  font-size: 10px /* ${({ theme }) => theme.fontSizes.xl} */;
+
+  text-transform: capitalize;
+}

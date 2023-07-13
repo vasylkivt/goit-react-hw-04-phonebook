@@ -4,19 +4,6 @@ import { AiOutlinePhone } from 'react-icons/ai';
 
 import { Field as FormikInput, Form as FormikForm } from 'formik';
 
-export const FormWrap = styled.div`
-  max-width: 650px;
-  position: relative;
-  padding-top: ${({ theme }) => theme.spacing(8)};
-  padding-bottom: ${({ theme }) => theme.spacing(8)};
-  padding-left: ${({ theme }) => theme.spacing(5)};
-  padding-right: ${({ theme }) => theme.spacing(5)};
-
-  border-radius: ${({ theme }) => theme.spacing(3)};
-  background-color: ${({ theme }) => theme.colors.backgroundColorSecond};
-  margin-bottom: ${({ theme }) => theme.spacing(7)};
-`;
-
 export const Form = styled(FormikForm)`
   position: relative;
   display: flex;
