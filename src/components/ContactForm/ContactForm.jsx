@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { nanoid } from 'nanoid';
@@ -12,9 +12,11 @@ import {
   TelephoneIcon,
 } from './ContactForm.style';
 
-export function ContactForm({ onSubmit, children }) {
+export const ContactForm = ({ onSubmit, children }) => {
   const nameInputId = nanoid();
   const numberInputId = nanoid();
+
+  const inputNameRef = useRef();
 
   return (
     <>
@@ -25,22 +27,30 @@ export function ContactForm({ onSubmit, children }) {
           number: '',
         }}
         onSubmit={(values, actions) => {
+          inputNameRef.current.focus();
+
           onSubmit({ ...values, id: nanoid() }, actions);
         }}
       >
         <Form>
           <InputName htmlFor={nameInputId}>
             <PersonIcon />
-            <Input
-              autoComplete="off"
-              placeholder="Enter contact name"
-              id={nameInputId}
-              type="text"
-              name="name"
-              pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-              required
-            />
+
+            {
+              <Input
+                innerRef={el => {
+                  inputNameRef.current = el;
+                }}
+                autoComplete="off"
+                placeholder="Enter contact name"
+                id={nameInputId}
+                type="text"
+                name="name"
+                pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+                title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+                required
+              />
+            }
           </InputName>
 
           <InputName htmlFor={numberInputId}>
@@ -62,7 +72,7 @@ export function ContactForm({ onSubmit, children }) {
       </Formik>
     </>
   );
-}
+};
 
 ContactForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
